@@ -1,0 +1,27 @@
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(getDurationString(-3670));
+        System.out.println(getDurationString(3670));
+        System.out.println(getDurationString(-65,45));
+        System.out.println(getDurationString(65,59));
+        System.out.println(getDurationString(65,145));
+
+    }
+    public static String getDurationString(int seconds){
+int minutes = seconds / 60;
+if(seconds < 0){
+    return "wrong number, for seconds: " + seconds + " should be positive number";
+}
+return getDurationString(minutes,seconds % 60);
+    }
+
+ public static String getDurationString(int minutes, int seconds){
+     int hours = minutes / 60;
+     int remainingMinutes = minutes % 60;
+     if(minutes < 0 || (seconds > 59 || seconds < 0)){
+         return "wrong number, remember that seconds: " + seconds + " should be positive number not bigger then 59, remember that minutes:" + minutes + "should be positive too" ;
+     }
+     return hours + "h " + remainingMinutes + "m " + seconds + "s'";
+
+}
+}
