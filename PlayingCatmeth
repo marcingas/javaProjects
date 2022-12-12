@@ -1,0 +1,3 @@
+public static boolean isCatPlaying(boolean summer, int temperature){
+        return (summer == true) ? ((temperature >= 25 && temperature <=45) ? true : false ) : ((temperature >= 25 && temperature <=35) ? true : false);
+    }
