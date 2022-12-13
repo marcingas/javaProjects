@@ -1,0 +1,26 @@
+public class Main {
+    public static void main(String[] args) {
+char charValue = 'X';
+switch (charValue){
+    case 'A':
+        System.out.printf("A is Able");
+        break;
+    case 'B':
+        System.out.printf("B is Baker");
+        break;
+    case 'C':
+        System.out.printf("C is Charlie");
+        break;
+    case 'D':
+        System.out.printf("D is Dog");
+        break;
+    case 'E':
+        System.out.println("E is Easy");
+        break;
+    default:
+        System.out.println("Letter " + charValue + " was not found");
+        break;
+}
+    }
+
+}
