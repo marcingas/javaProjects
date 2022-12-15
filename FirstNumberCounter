@@ -1,0 +1,51 @@
+public class Main {
+    public static void main(String[] args) {
+        //ważne elementy:
+        // 1.jak sprawdzać zbiory liczb za pomocą for.
+        //2.jak sumować ile tych liczb spełnia warunek
+        // 3. jak przypisać metodę do zliczania przez for za pomocą if
+        //4. jak zakończyć zliczanie kiedy znajdziemy oczekiwaną ilość liczb
+        //5. jak ze zbioru kilku liczb wybrać tylko 1 a reszta jest false za pomocą if. i return
+        //6. jak zawsze co się da uzależniać od głównej zmiennej metody w if
+        //7. jak return true umieścić na końcu jeśli nie są spełnione warunki z if. 
+
+
+        //chcemy zliczać ile liczb pierwszych jest w danym zakresie wykorzystując metodę is Prime
+        //na początek chcemy sobie wyświetlić te liczby a później policzyć ile ich jest
+        // aby policzyć ile ich jest możemy użyć (albo dowolnego innego słowa które zdefiniujemy jako int i nadamy wartość 0 count++ on będzie zliczał a później wyświetllić count
+      int count = 0;
+      //tworzymy pętle, która przeprowadzi nas po zbiorze liczb jakie chcemy ssprawdzić. wykrozystammy do tego int i
+      //żeby wprowadzić metodę isPrime użyjemy if - czyli jeżeli isPrime(i) dopóki są jakieś zmienne do tej metodu to licz.
+        for(int i = 0; i <= 100; i++){
+          if(isPrime(i)){
+              System.out.println("number " + i + "  is a prime number");
+              count++;
+              if(count == 9){
+                  System.out.println("found 9 numbers - exiting loop");
+                  break;
+
+              }
+          }
+
+      }
+        System.out.println("Total prime numbers betweeen 0 and 100 is: " + count);
+    }
+
+    //tworzymy metodę do zliczania liczb pierwszych:
+    //zakładamy, że liczba nie jest pierwsza jeśli jest 0 lub 1 oraz jeśli jest podzielna
+    //przez inną liczbę naturalną, żeby wykluczyć pierwsze dwie liczby 0 i 1 użyjemy
+   //zabiegu: stwierdzenie if, które będzie false chyba że będzie to dwójka. Czyli ze zbioru liczb 0-2 wszystie są fałszywe oprócz 2
+// zakładamy że w pierwszej połowie liczb znajdzie się ten podzielnik albo go nie ma wcale.
+    public static boolean isPrime(int wholeNumber){
+       if(wholeNumber <= 2){
+           return(wholeNumber == 2);
+       }
+       //żeby nie ograniczać się do wskazywania zawsze max liczby w for można ją uzależnić od głównej liczby
+       for(int divisor = 2; divisor <= wholeNumber / 2; divisor++){
+           if(wholeNumber % divisor == 0) {
+               return false;
+           }
+       }
+
+   return true; }
+}
