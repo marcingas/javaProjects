@@ -1,0 +1,31 @@
+
+
+public class Main {
+    public static void main(String[] args) {
+
+        System.out.println(isPalinrome(-1221));
+        System.out.println(isPalinrome(707));
+        System.out.println(isPalinrome(11212));
+
+    }
+   public static boolean isPalinrome(int number){
+     boolean palindrome;
+     int reverse = 0;
+     int lastDigit= 0;
+     if(number < 0){
+         number = number * (-1);
+     }
+       int number1 = number;
+
+
+     while ((number1 > 0)){
+            lastDigit = number1 % 10;
+            reverse = reverse * 10;
+            reverse += lastDigit;
+             number1 = number1 / 10;
+      }
+    palindrome = (number == reverse ) ? true : false;
+
+     return palindrome;
+    }
+}
