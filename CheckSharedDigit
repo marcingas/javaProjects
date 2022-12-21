@@ -1,0 +1,29 @@
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(hasSharedDigit(12,23));
+        System.out.println(hasSharedDigit(9,99));
+        System.out.println(hasSharedDigit(15,55));
+
+    }
+    public static boolean hasSharedDigit(int x, int y){
+        int checkx = 0;
+        int checky1 = 0;
+        int checky2 = 0;
+
+        if(!(x >= 10 && x <= 99) || !(y >= 10 && y <= 99)){
+            return false;
+        }
+
+        checky1 = y % 10;
+        checky2 = (y / 10)% 10;
+        while(x >0){
+            checkx = x % 10;
+            if((checky1 == checkx) || (checky2 == checkx)){
+                return true;
+            }
+            x /= 10;
+        }
+
+
+        return false;
+    }}
