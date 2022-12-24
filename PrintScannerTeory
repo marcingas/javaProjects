@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int currentYear = 2022;
+        try{
+        System.out.println(getInputFromConsole(currentYear));}
+        catch (NullPointerException e){
+        System.out.println(getInputFromScanner(currentYear));}
+
+    }
+    public static String getInputFromConsole(int currentYear){
+        String name = System.console().readLine("Hi, What's Your name?");
+        System.out.println("HI " + name + "Thanks for taking the course!");
+        int dateOfBirth = Integer.parseInt(System.console().readLine("What year were you born?"));
+        int age = currentYear - dateOfBirth;
+
+
+        return "So you are " + age + " years old";
+    }
+    public static String getInputFromScanner(int currentYear){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Hi, What's you name?");
+        String name = scanner.nextLine();
+        System.out.println(name + ", ... hey are You there still?!..");
+        String response = scanner.nextLine();
+        System.out.println(response + ", ...Ok " + name + ", What year were you born?");
+        String dateOfBirth = scanner.nextLine();
+        int age = currentYear - Integer.parseInt(dateOfBirth);
+
+
+
+
+    return "So you are " + age + " year old...by the way... have a nice time with your wife in coffee " + name;
+    }
+}
