@@ -3,23 +3,29 @@ public class Main {
 
         Animal animal = new Animal("Generic Animal", "Huge", 400);
 
-   doAnimalStuff(animal, "fast");
+         doAnimalStuff(animal, "fast");
 
         Dog dog = new Dog("Matt", 35, "curly", "straight");
-   doAnimalStuff(dog,"slow");
+        doAnimalStuff(dog,"slow");
 
-   Dog yorkie = new Dog("Yorkie", 15);
-   doAnimalStuff(yorkie, "fast");
-   Dog jamnik = new Dog("Jamnik", 45, "curly","straight");
-doAnimalStuff(jamnik, "slow");
+        Dog yorkie = new Dog("Yorkie", 15);
+        doAnimalStuff(yorkie, "fast");
+   
+        Dog jamnik = new Dog("Jamnik", 45, "curly","straight");
+        doAnimalStuff(jamnik, "slow");
     }
+    
+    
     public static void doAnimalStuff(Animal animal, String speed){
         animal.makeNoise();
         animal.move(speed);
         System.out.println(animal);
     }
     }
-    public class Animal {
+    
+    
+    
+public class Animal {
     private String type;
     private String size;
     private double weight;
