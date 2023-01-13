@@ -1,0 +1,84 @@
+public class Main {
+    public static void main(String[] args) {
+
+        Account bobsAccount = new Account();
+        bobsAccount.setAccountNumber(123454647);
+        bobsAccount.setBalance(100.5);
+        bobsAccount.setCustomerName("Bob Wilson");
+        bobsAccount.setEmail("bob.wilson@gmail.com");
+        bobsAccount.setCustomerPhone("12322211");
+
+        bobsAccount.withdrawFunds(100);
+        bobsAccount.depositFunds(250);
+        bobsAccount.withdrawFunds(45.5);
+        bobsAccount.depositFunds(23.2);
+        bobsAccount.summarizedAccountInformation();
+
+    }
+}
+
+
+
+public class Account {
+    private int accountNumber;
+    private double balance;
+    private String customerName;
+    private String email;
+    private String customerPhone;
+
+    public int getAccountNumber() {
+        return accountNumber;
+    }
+
+    public void setAccountNumber(int accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public void depositFunds(double depositAmount) {
+        balance += depositAmount;
+        System.out.println("Deposit of " + depositAmount + " made. New balance is $ " + balance);
+    }
+    public void withdrawFunds(double withdrawAmount) {
+        if(balance - withdrawAmount < 0){
+            System.out.println("Insufficient Funds! you only have $ " + balance + " in your account");
+        } else{
+        balance -= withdrawAmount;
+        System.out.println("Withdrawal of $ " + withdrawAmount + "processed, Remaining balance = $ " + balance);
+    }
+    }
+    public void summarizedAccountInformation(){
+        System.out.printf("\n owner's name is: " + customerName + "\n account number is : " + accountNumber + "\n owner's email is: " + email + "\n owner's phone nr is: " + customerPhone + "\n account balance is: " + balance );
+    }
+}
