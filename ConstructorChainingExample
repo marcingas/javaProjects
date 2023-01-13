@@ -1,0 +1,42 @@
+public class Main {
+    public static void main(String[] args) {
+
+        Customer customer = new Customer("Tim", 1000, "tim@dim.pl");
+        System.out.println(customer.getName());
+        System.out.println(customer.getEmail());
+        System.out.println(customer.getCreditLimit());
+
+
+        Customer customer1 = new Customer();
+        System.out.println(customer1.getName());
+        System.out.println(customer1.getEmail());
+        System.out.println(customer1.getCreditLimit());
+
+        
+        Customer thirdCustomer = new Customer("Joe", "joe@limit.pl");
+        System.out.println(thirdCustomer.getName());
+        System.out.println(thirdCustomer.getEmail());
+        System.out.println(thirdCustomer.getCreditLimit());
+    }
+}
+ public double getCreditLimit() {
+        return creditLimit;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Customer(String name, double creditLimit, String email) {
+        this.name = name;
+        this.creditLimit = creditLimit;
+        this.email = email;
+    }
+    public Customer (){
+        this("john", "john.grol@ut.pl");
+    }
+
+    public Customer(String name,String email) {
+        this(name, 1000, email);
+    }
+}
