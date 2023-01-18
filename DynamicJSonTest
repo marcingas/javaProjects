@@ -1,0 +1,59 @@
+package org.example;
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
+import static io.restassured.RestAssured.*;
+
+@Test (dataProvider = "BooksData")
+public class API {
+    public static void addBooks(String name,String isbn, String aisle, String author){
+        //1. add:
+        RestAssured.baseURI = "http://216.10.245.166";
+       String response = given().header("Content-Type","application/json").body(payload.AddBook(name, isbn, aisle, author)).
+        when().post("Library/Addbook.php").then().assertThat().statusCode(200).extract().response().asString();
+
+         JsonPath js = new JsonPath(response);
+         String id = js.getString("ID");
+
+         System.out.printf("%n ID of Book is: %s%n",id);
+
+        //2. get:
+        String getBook = given().queryParam("ID",id ).when().get("Library/GetBook.php").then().assertThat().statusCode(200).extract().response().asString();
+        System.out.println("get information is : " + getBook);
+
+        //3. delete:
+String delete = given().header("Content-Type","application/json").body("{\n" +
+        " \n" +
+        "\"ID\" : \""+id+"\"\n" +
+        " \n" +
+        "} \n").when().post("/Library/DeleteBook.php").then().assertThat().statusCode(200).extract().response().asString();
+
+        System.out.println("delete information is: " + delete);
+    }
+    
+    
+    
+    @DataProvider(name = "BooksData")
+    public Object [][] getData(){
+        return new Object[][]{{"Wszyskto o kuchni","poradniki","46473","Jacek Kukuczka"}, {"Potop","przygodowe", "8576463", "Sienkiewicz"}, {"Jak zjeść rybę w lesie ","poradniki", "4473663", "Piotrowski Jan"} };
+    }
+
+
+
+}
+
+package org.example;
+
+public class payload {
+    public static String AddBook (String name,String isbn, String aisle, String author){
+        String payload = "{\n" +
+                "\n" +
+                "\"name\":\""+name+"\",\n" +
+                "\"isbn\":\""+ isbn +"\",\n" +
+                "\"aisle\":\""+aisle+"\",\n" +
+                "\"author\":\""+author+"\"\n" +
+                "}\n";
+        return payload;
+    }
+}
