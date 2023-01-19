@@ -163,6 +163,8 @@ public class MealOrder {
         side.printItem();
         System.out.println("-".repeat(30));
         Item.printItem("Total Price", getTotalPrice());
+        System.out.println("-//-".repeat(7));
+        System.out.printf("Thank You for Eating with us!%nYou are most Welcome any time!%nTake care for environment!");
     }
     public void addBurgerToppings (String extra){
         burger.addToppings(extra);
