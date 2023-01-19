@@ -1,0 +1,178 @@
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("What path of order you choose?(BASIC,CUSTOM) ");
+        Scanner scanner7 = new Scanner(System.in);
+        String order = scanner7.nextLine();
+
+        if(order.equals("BASIC") ){
+            orderRequest("Hamburger","Cola","Fries","CHEESE", "MEDIUM", "MEDIUM");
+
+    } else
+    {
+        System.out.println("What sort of Burger do You want? ");
+        Scanner scanner = new Scanner(System.in);
+        String burgerType = scanner.nextLine();
+        System.out.println("What sort of drink do You want?(fe. Cola, 7-UP, TEA, COFFE, SHAKE) ");
+        Scanner scanner1 = new Scanner(System.in);
+        String drinkType = scanner1.nextLine();
+        System.out.println("What sort of Side Type do You want?(fe. Fries, Hot potato,Hot tomato, French fries) ");
+        Scanner scanner3 = new Scanner(System.in);
+        String sideType = scanner3.nextLine();
+        System.out.println("What sort of 1 Extra Topping do You want?(fe. AVOCADO, CHEESE, ONION, BACON, SALAMI) ");
+        Scanner scanner4 = new Scanner(System.in);
+        String extraTopping = scanner4.nextLine();
+        System.out.println("What size of drink do You want?(SMALL, MEDIUM, LARGE) ");
+        Scanner scanner5 = new Scanner(System.in);
+        String drinkSize = scanner5.nextLine();
+        System.out.println("What size of SIDE do You want?(SMALL, MEDIUM, LARGE) ");
+        Scanner scanner6 = new Scanner(System.in);
+        String sideSize = scanner6.nextLine();
+
+
+        orderRequest(burgerType,drinkType,sideType,extraTopping, drinkSize, sideSize);}
+
+
+
+    }
+    public static void orderRequest(String burgerType, String drinkType, String sideType, String extraTopping, String drinkSize, String sideSize ){
+
+        MealOrder firstMeal = new MealOrder(burgerType,drinkType,sideType);
+        firstMeal.addBurgerToppings(extraTopping);
+        firstMeal.setDrinkSize(drinkSize);
+        firstMeal.setSideSize(sideSize);
+        firstMeal.printItemizedList();
+
+    }
+}
+
+public class Item {
+    private String type;//burger,drink,side
+    private String name;//fe. Cheese, cola, fries
+    private String size = "MEDIUM";
+    private double price = 4.00;
+
+    public Item(){
+    }
+
+    public Item(String type, String name, double price) {
+        this.type = type.toUpperCase();
+        this.name = name.toUpperCase();
+        this.price = price;
+    }
+
+    public Item(String type, String name) {
+        this.type = type.toUpperCase();
+        this.name = name.toUpperCase();
+    }
+
+    public String getName(){
+        if(type.equals("SIDE") || type.equals("DRINK")){
+            return size + " " + name;
+        }
+        return  name;
+    }
+    public double getBasePrice(){
+        return price;
+    }
+    public double getAdjustedPrice(){
+        return switch (size){
+            case "SMALL" -> getBasePrice() - 0.5;
+            case "LARGE" -> getBasePrice() + 1.00;
+            default -> getBasePrice();
+        };
+    }
+    public void setSize(String size) {
+        this.size = size;
+    }
+    public static void printItem (String name, double price){
+        System.out.printf("%20s:%6.2f%n", name, price);
+    }
+    public void printItem(){
+        printItem(getName(), getAdjustedPrice());
+    }
+}
+
+public class Burger extends Item {
+
+    private Item extra;
+
+    public Burger(String name, double price) {
+        super("BURGER", name, price);
+    }
+
+    @Override
+    public String getName() {
+        return super.getName()+ " BURGER";
+    }
+
+    @Override
+    public double getAdjustedPrice() {
+        return getBasePrice() +
+                ((extra == null) ? 0 : extra.getAdjustedPrice());
+    }
+    public double getExtraPrice (String toppingName){
+        return switch (toppingName.toUpperCase()){
+            case "AVOCADO","CHEESE","ONION" -> 1.0;
+            case "BACON", "HAM", "SALAMI" -> 1.50;
+            default -> 0.55;
+        };
+    }
+    public void addToppings (String extra){
+        this.extra = new Item("TOPPINGS",extra,getExtraPrice(extra));
+    }
+    public void printItemizedList(){
+        printItem("BASE BURGER", getBasePrice());
+        if(extra != null){
+            extra.printItem();
+        }
+    }
+
+    @Override
+    public void printItem() {
+        printItemizedList();
+        System.out.println("-".repeat(30));
+        super.printItem();
+    }
+}
+
+public class MealOrder {
+    private Burger burger;
+    private Item drink;
+    private Item side;
+
+    public MealOrder(){
+        this("burger", "coke","fries");
+    }
+
+    public MealOrder(String burgerType, String drinkType, String sideType){
+        this.burger = new Burger(burgerType, 6.0);
+        this.drink = new Item("drink", drinkType, 1.00);
+        this.side = new Item("side", sideType, 1.50);
+    }
+    public double getTotalPrice() {
+        return side.getAdjustedPrice() + drink.getAdjustedPrice() + burger.getAdjustedPrice();
+    }
+
+    public void printItemizedList() {
+        System.out.println("Your burger optimalization: ");
+        burger.printItem();
+        System.out.println("Rest of Your order :");
+        drink.printItem();
+        side.printItem();
+        System.out.println("-".repeat(30));
+        Item.printItem("Total Price", getTotalPrice());
+    }
+    public void addBurgerToppings (String extra){
+        burger.addToppings(extra);
+    }
+    public void setDrinkSize(String size){
+        drink.setSize(size);}
+    public void setSideSize (String size){
+            side.setSize(size);}
+
+    }
+
+
+
