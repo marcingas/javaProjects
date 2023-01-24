@@ -1,0 +1,64 @@
+package org.example;
+
+import java.util.Arrays;
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[][] array2 = new int[4][4];
+        System.out.println(Arrays.toString(array2));
+        System.out.println("array2.lenght = " + array2.length);
+
+        System.out.println("drukujemy elementy tabel wewnątrz tabeli array2");
+        for(int[] innerArray: array2) {
+            System.out.println(Arrays.toString(innerArray));
+        }
+
+        System.out.println("tutaj drukujemy el wewn za pomocą for i zmiennych i i j przypisujemy także wartości do i i j ");
+array2[1] = new int[] {10,20,30};
+        System.out.println(Arrays.deepToString(array2));
+
+
+
+
+        for(int i = 0; i < array2.length; i++){
+                var innerArray2= array2[i];
+               for(int j = 0; j <  innerArray2.length; j++){
+//                   System.out.print(array2[i][j] + " ");
+                   array2[i][j] = (i * 10) + (j +1);
+                }
+            System.out.println();
+            }
+
+        System.out.println("tutaj drukujemy to samo wykorzystując var");
+        for(var innerArr : array2){
+            for(var element : innerArr){
+                System.out.print(element + " ");
+            }
+            System.out.println();
+        }
+        System.out.println("a teraz do tego samego wykorzystujemy fukcję java");
+        System.out.println(Arrays.deepToString(array2));
+
+
+    Object[] anyArray = new Object[3];
+    anyArray [0] = new String[]{"a", "b", "c"};
+        System.out.println("after adding array 0" + Arrays.deepToString(anyArray));
+    anyArray [1]= new String[][]{
+            {"1","2"},
+            {"3","4","5"},
+            {"6", "7", "8", "9"}
+    };
+        System.out.println( "after adding array 1"+ Arrays.deepToString(anyArray));
+    anyArray[2] = new int[2][2][2];
+        System.out.println("array3:" + Arrays.deepToString(anyArray));
+
+       for(Object element : anyArray){
+           System.out.println("element type: " + element.getClass().getSimpleName());
+           System.out.println("Element to String() =" + element);
+           System.out.println(Arrays.deepToString((Object[]) element));
+       }
+
+        }
+    }
+
