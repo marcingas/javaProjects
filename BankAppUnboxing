@@ -21,6 +21,10 @@ public class Challenge {
         System.out.println("adding new customer nr 3: ");
         bank.addNewCustomer("Joanna Giorgina", 6000);
         System.out.println(bank);
+        bank.addTransaction("Marianna Giorg",-10.25);
+        bank.addTransaction("Marianna Giorg",-75.01);
+        bank.printStatement("Marianna Giorg");
+        bank.printStatement("Marianna Giorgiewska");
 
 
 
@@ -62,6 +66,26 @@ return null;
             Customer customer = new Customer(customerName, initialDeposit);
             customers.add(customer);
             System.out.println("New Customer added: " + customer);
+        }
+    }
+    public void addTransaction(String name, double transactionAmmount){
+      Customer customer = getCustomer(name);
+      if(customer != null){
+          customer.transactions().add(transactionAmmount);
+      }
+
+}
+    public void printStatement(String customerName){
+        Customer customer = getCustomer(customerName);
+        if(customer == null){
+            System.out.println("there is no such Customer");
+            return;
+        }
+        System.out.println("-".repeat(30));
+        System.out.println("Customer name: " + customerName);
+        System.out.println("Transactions: ");
+        for(double d : customer.transactions()){
+            System.out.printf("$%10.2f (%s)%n", d, d< 0 ? "debit": "credit");
         }
     }
 
