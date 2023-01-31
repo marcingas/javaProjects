@@ -1,0 +1,68 @@
+import java.util.ArrayList;
+
+record Customer(String name, ArrayList<Double>transactions){
+    public Customer(String name, double initialTransaction){
+        this(name.toUpperCase(),
+        new ArrayList<>(500));
+        transactions.add(initialTransaction);
+    }
+}
+
+public class Challenge {
+    public static void main(String[] args) {
+
+
+        Customer bob = new Customer("Bob Shreder", 5000);
+        System.out.println(bob);
+        Bank bank= new Bank("Mbank");
+        bank.addNewCustomer("Marianna Giorg",5000);
+        System.out.println("adding new customer nr 2: ");
+        bank.addNewCustomer("Marianna Giorg", 5000);
+        System.out.println("adding new customer nr 3: ");
+        bank.addNewCustomer("Joanna Giorgina", 6000);
+        System.out.println(bank);
+
+
+
+    }
+
+}
+
+    
+class Bank {
+    @Override
+    public String toString() {
+        return "Bank{" +
+                "name='" + name + '\'' +
+                ", customers=" + customers +
+                '}';
+    }
+
+    private String name;
+    ArrayList<Customer> customers = new ArrayList<>(5000);
+
+    public Bank(String name) {
+        this.name = name;
+    }
+
+    private Customer getCustomer(String customerName) {
+        for (var customer : customers) {
+            if (customer.name().equalsIgnoreCase(customerName)) {
+                System.out.printf("Customer %s already exist %n", customerName);
+                return customer;
+            }
+
+        }
+        System.out.printf("Customer (%s) wasn't found %n ", customerName);
+return null;
+    }
+
+    public void addNewCustomer(String customerName, double initialDeposit) {
+        if (getCustomer(customerName) == null) {
+            Customer customer = new Customer(customerName, initialDeposit);
+            customers.add(customer);
+            System.out.println("New Customer added: " + customer);
+        }
+    }
+
+}
